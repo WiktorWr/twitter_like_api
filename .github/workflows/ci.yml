@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      MASTER_KEY: ${{ secrets.MASTER_KEY }}
+      RAILS_MASTER_KEY: ${{ secrets.MASTER_KEY }}
 
     steps:
       - name: Checkout code

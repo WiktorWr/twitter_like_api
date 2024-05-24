@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
+  port: <%= ENV.fetch("DATABASE_PORT", 5432) %>
+  pool: 20
+  timeout: 5000
+  user: <%= ENV.fetch("DATABASE_USER", "twitter_backend") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "twitter_backend") %>
+
+development:
+  <<: *default
+  host: postgres
+  database: <%= ENV.fetch("DATABASE_NAME", "twitter_backend_development") %>
+
+test:
+  <<: *default
+  host: postgres
+  database: <%= ENV.fetch("DATABASE_NAME", "twitter_backend_test") %>

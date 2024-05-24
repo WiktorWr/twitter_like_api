@@ -10,6 +10,8 @@ Bundler.require(*Rails.groups)
 
 module TwitterApi
   class Application < Rails::Application
+    config.action_controller.permit_all_parameters = true
+
     config.generators do |g|
       g.test_framework :rspec, fixture: true
       g.view_specs false

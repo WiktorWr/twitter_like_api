@@ -2,14 +2,22 @@
 
 source "https://rubygems.org"
 
+gem "bcrypt"
 gem "bootsnap", require: false
-gem "pg", "~> 1.1"
-gem "puma", ">= 5.0"
-gem "rails", "~> 7.1.3", ">= 7.1.3.2"
-gem "tzinfo-data", platforms: %i[mswin mswin64 mingw x64_mingw jruby]
+gem "doorkeeper"
+gem "dry-monads"
+gem "dry-validation"
+gem "pg"
+gem "pry"
+gem "pry-byebug"
+gem "pry-rails"
+gem "puma"
+gem "rails"
 
 group :development do
-  gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
+  gem "active_record_query_trace"
+  gem "annotate"
+  gem "rails-erd"
   gem "relaxed-rubocop"
   gem "rubocop", require: false
   gem "rubocop-performance", require: false
@@ -18,7 +26,9 @@ group :development do
 end
 
 group :development, :test do
-  gem "debug", platforms: %i[mri mswin mswin64 mingw x64_mingw]
+  gem "factory_bot"
+  gem "factory_bot_rails"
+  gem "faker"
 end
 
 group :test do

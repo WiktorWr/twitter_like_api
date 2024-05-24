@@ -8,6 +8,14 @@ Bundler.require(*Rails.groups)
 
 module TwitterApi
   class Application < Rails::Application
+    config.generators do |g|
+      g.test_framework :rspec, fixture: true
+      g.view_specs false
+      g.helper_specs false
+    end
+
+    config.require_master_key = true
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 

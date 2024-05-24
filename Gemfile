@@ -14,3 +14,9 @@ group :development do
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
 end
 
+group :test do
+  gem "rspec_junit_formatter"
+  gem "rspec-rails"
+end
+
+

@@ -10,6 +10,11 @@ jobs:
 
     env:
       RAILS_MASTER_KEY: ${{ secrets.MASTER_KEY }}
+      DATABASE_HOST: postgres
+      DATABASE_USER: twitter_backend
+      DATABASE_PASSWORD: twitter_backend
+      DATABASE_NAME: twitter_backend_test
+      DATABASE_PORT: 5432
 
     services:
       postgres:

@@ -50,6 +50,15 @@ RSpec.configure do |config|
               text:       { type: :string },
               created_at: { type: :string, format: "date-time" },
             }
+          },
+          user: {
+            type:       :object,
+            properties: {
+              id:         { type: :integer },
+              first_name: { type: :string },
+              last_name:  { type: :string },
+              email:      { type: :string },
+            }
           }
         }
       }

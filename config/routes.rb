@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       end
 
       resources :posts, only: %i[create index]
+      resources :users, only: %i[index]
     end
   end
 end

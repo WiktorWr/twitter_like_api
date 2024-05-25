@@ -29,8 +29,8 @@ group :development, :test do
   gem "factory_bot"
   gem "factory_bot_rails"
   gem "faker"
-  gem "rswag-specs"
   gem "rspec_api_documentation"
+  gem "rswag-specs"
 end
 
 group :test do

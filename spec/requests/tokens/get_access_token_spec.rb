@@ -33,8 +33,7 @@ describe "Tokens API" do
                            name:    "refresh_token",
                            summary: "Refresh access token"
 
-
-      let(:user)  { create(:user) }
+      let(:user) { create(:user) }
 
       response "200", "sessions created" do
         schema type:       :object,

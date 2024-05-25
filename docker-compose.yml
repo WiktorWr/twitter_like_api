@@ -30,5 +30,14 @@ services:
                bundle exec rails db:migrate &&
                bundle exec rails s -b 0.0.0.0 -p 3000"
 
+  docs:
+    image: redocly/redoc
+    volumes:
+      - ./docs/v1/:/usr/share/nginx/html/swagger/
+    ports:
+      - "1337:80"
+    environment:
+      SPEC_URL: swagger/swagger.yaml
+
 volumes:
   postgres_data:

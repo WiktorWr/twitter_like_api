@@ -29,9 +29,13 @@ group :development, :test do
   gem "factory_bot"
   gem "factory_bot_rails"
   gem "faker"
+  gem "rswag-specs"
+  gem "rspec_api_documentation"
 end
 
 group :test do
+  gem "database_cleaner"
+  gem "database_cleaner-active_record"
   gem "rspec_junit_formatter"
   gem "rspec-rails"
 end

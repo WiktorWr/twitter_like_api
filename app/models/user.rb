@@ -22,6 +22,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_many :posts, dependent: :destroy
+
   # rubocop:disable Rails/InverseOf
   has_many :access_grants,
            class_name:  "Doorkeeper::AccessGrant",

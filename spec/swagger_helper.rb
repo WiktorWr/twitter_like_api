@@ -42,7 +42,16 @@ RSpec.configure do |config|
             in:          :header
           }
         },
-        schemas:         {}
+        schemas:         {
+          post: {
+            type:       :object,
+            properties: {
+              id:         { type: :integer },
+              text:       { type: :string },
+              created_at: { type: :string, format: "date-time" },
+            }
+          }
+        }
       }
     }
   }

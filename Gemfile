@@ -7,6 +7,7 @@ gem "bootsnap", require: false
 gem "doorkeeper"
 gem "dry-monads"
 gem "dry-validation"
+gem "pagy_cursor"
 gem "pg"
 gem "pry"
 gem "pry-byebug"

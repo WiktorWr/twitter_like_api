@@ -10,7 +10,7 @@ Rails.application.routes.draw do
         skip_controllers :authorizations, :applications, :authorized_applications
       end
 
-      resources :posts, only: %i[create]
+      resources :posts, only: %i[create index]
     end
   end
 end

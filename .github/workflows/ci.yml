@@ -1,31 +1,27 @@
-name: Rails CI/CD
+name: CI
 
 on:
- push:
-   branches: [ main ]
+  push:
+    branches:
+      - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
-    env:
-      RAILS_MASTER_KEY: ${{ secrets.MASTER_KEY }}
-      DATABASE_HOST: postgres
-      DATABASE_USER: twitter_backend
-      DATABASE_PASSWORD: twitter_backend
-      DATABASE_NAME: twitter_backend_test
-      DATABASE_PORT: 5432
-
+    
     services:
       postgres:
-        image: postgres:alpine
+        image: postgres:15
         ports:
           - 5432:5432
         env:
           POSTGRES_USER: twitter_backend
           POSTGRES_PASSWORD: twitter_backend
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
+        options: >-
+          --health-cmd="pg_isready -U twitter_backend"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     steps:
       - name: Checkout code
@@ -34,13 +30,31 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.0
+          ruby-version: 3.2
+
+      - name: Cache gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
 
       - name: Install dependencies
-        run: bundle install
+        run: bundle install --jobs 4 --retry 3
 
-      - name: Run tests
+      - name: Set up database
+        run: |
+          cp config/database.yml config/database.yml.bak
+          sed -i 's/host:.*$/host: localhost/' config/database.yml
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
+        env:
+          DATABASE_USER: twitter_backend
+          DATABASE_PASSWORD: twitter_backend
+
+      - name: Run RSpec tests
         run: bundle exec rspec
 
-      - name: Run rubocop 
+      - name: Run RuboCop
         run: bundle exec rubocop

@@ -38,4 +38,6 @@ group :test do
   gem "database_cleaner-active_record"
   gem "rspec_junit_formatter"
   gem "rspec-rails"
+  gem "simplecov", require: false
+  gem "simplecov-cobertura", require: false
 end

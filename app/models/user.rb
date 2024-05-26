@@ -24,6 +24,9 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
 
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships, source: :friend
+
   # rubocop:disable Rails/InverseOf
   has_many :access_grants,
            class_name:  "Doorkeeper::AccessGrant",

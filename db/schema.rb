@@ -10,9 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_25_101505) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_26_174549) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "invitation_status", ["pending", "accepted", "rejected"]
+
+  create_table "friendship_invitations", force: :cascade do |t|
+    t.bigint "sender_id", null: false
+    t.bigint "receiver_id", null: false
+    t.enum "invitation_status", default: "pending", null: false, enum_type: "invitation_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_friendship_invitations_on_receiver_id"
+    t.index ["sender_id", "receiver_id"], name: "index_friendship_invitations_on_sender_id_and_receiver_id", unique: true, where: "(invitation_status = 'pending'::invitation_status)"
+    t.index ["sender_id"], name: "index_friendship_invitations_on_sender_id"
+    t.check_constraint "sender_id <> receiver_id", name: "sender_not_equal_to_receiver"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "friend_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
+    t.index ["user_id"], name: "index_friendships_on_user_id"
+    t.check_constraint "user_id <> friend_id", name: "user_id_not_equal_to_friend_id"
+  end
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.bigint "resource_owner_id", null: false
@@ -77,6 +104,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_25_101505) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "friendship_invitations", "users", column: "receiver_id"
+  add_foreign_key "friendship_invitations", "users", column: "sender_id"
+  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"

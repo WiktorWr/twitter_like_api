@@ -94,6 +94,9 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
+    counter_culture (3.5.3)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
     crass (1.0.6)
     database_cleaner (2.0.2)
       database_cleaner-active_record (>= 2, < 3)
@@ -385,6 +388,7 @@ DEPENDENCIES
   annotate
   bcrypt
   bootsnap
+  counter_culture
   database_cleaner
   database_cleaner-active_record
   doorkeeper

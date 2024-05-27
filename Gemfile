@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gem "bcrypt"
 gem "bootsnap", require: false
+gem "counter_culture"
 gem "doorkeeper"
 gem "dry-monads"
 gem "dry-validation"

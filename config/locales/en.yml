@@ -10,3 +10,10 @@ en:
     users_are_friends: "User are friends already"
     not_pending: "Friendship invitation status for this action must be: pending"
     not_found: "Friendship invitation is not found"
+  posts:
+    not_found: "Post is not found"
+  friendships:
+    not_found: "Friendship is not found"
+  likes:
+    already_exists: "Like already exists"
+    not_found: "Like is not found"

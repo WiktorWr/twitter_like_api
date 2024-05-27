@@ -48,7 +48,7 @@ RSpec.configure do |config|
             properties: {
               id:         { type: :integer },
               text:       { type: :string },
-              created_at: { type: :string, format: "date-time" },
+              created_at: { type: :string, format: "date-time" }
             }
           },
           user: {
@@ -57,7 +57,16 @@ RSpec.configure do |config|
               id:         { type: :integer },
               first_name: { type: :string },
               last_name:  { type: :string },
-              email:      { type: :string },
+              email:      { type: :string }
+            }
+          },
+          friendship_invitation: {
+            type: :object,
+            properties: {
+              id:         { type: :integer },
+              receiver:   { "$ref": "#/components/schemas/user" },
+              sender:     { "$ref": "#/components/schemas/user" },
+              created_at: { type: :string, format: "date-time" }
             }
           }
         }

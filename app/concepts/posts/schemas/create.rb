@@ -2,9 +2,9 @@
 
 module Posts
   module Schemas
-    class Create < Dry::Validation::Contract
+    class Create < ::ApplicationContract
       params do
-        required(:text).filled(:string)
+        required(:text).filled(Types::StrippedString)
       end
     end
   end

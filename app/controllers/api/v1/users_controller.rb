@@ -3,7 +3,7 @@
 module Api
   module V1
     class UsersController < BaseController
-      before_action do
+      before_action only: [:index] do
         doorkeeper_authorize!
       end
 
@@ -16,6 +16,17 @@ module Api
           _, items = cursor_paginate(users, prepared_params)
 
           render json: ::Users::Representers::Show.all(items)
+        end
+      end
+
+      def create
+        case ::Users::UseCases::Create.new(prepared_params).call
+        in Success
+          head :created
+        in :validate, error
+          error!(:validation_error, error, :unprocessable_entity)
+        in :check_email_existence, _
+          head :created # I don't want to expose information whether an account exists
         end
       end
     end

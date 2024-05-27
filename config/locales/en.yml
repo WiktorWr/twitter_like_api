@@ -4,6 +4,7 @@ en:
     access_forbidden: "Access forbidden"
   users:
     not_found: "User is not found"
+    email_exists: "Email already exists"
   friendship_invitations:
     receiver_is_sender: "Receiver cannot be a sender"
     pending_invitation_exists: "Pending invitations already exists"

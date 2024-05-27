@@ -25,7 +25,5 @@ FactoryBot.define do
     last_name                       { Faker::Name.last_name }
     email                           { Faker::Internet.unique.email }
     password                        { Faker::Internet.password }
-    reset_password_token            { Faker::Internet.device_token }
-    reset_password_token_created_at { DateTime.current - 2.hours }
   end
 end

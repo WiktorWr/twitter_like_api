@@ -2,7 +2,7 @@
 
 module FriendshipInvitations
   module Schemas
-    class Reject < Dry::Validation::Contract
+    class Reject < ::ApplicationContract
       params do
         required(:id).filled(:integer, gt?: 0)
       end

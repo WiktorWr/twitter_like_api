@@ -2,9 +2,9 @@
 
 module Authentication
   module Schemas
-    class SignIn < Dry::Validation::Contract
+    class SignIn < ::ApplicationContract
       params do
-        required(:email).filled(:string)
+        required(:email).filled(::Types::EmailString, format?: EMAIL_FORMAT)
         required(:password).filled(:string)
       end
     end

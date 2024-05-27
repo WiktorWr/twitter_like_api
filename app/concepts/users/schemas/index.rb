@@ -2,7 +2,7 @@
 
 module Users
   module Schemas
-    class Index < Dry::Validation::Contract
+    class Index < ::ApplicationContract
       params do
         optional(:filters).hash do
           optional(:query).maybe(:string)

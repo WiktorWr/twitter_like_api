@@ -23,6 +23,36 @@ module Api
           error!(:check_pending_invitation_existence, error, :conflict)
         end
       end
+
+      def accept
+        case ::FriendshipInvitations::UseCases::Accept.new(*params_with_current_user).call
+        in Success(friendship_invitation)
+          render json: ::FriendshipInvitations::Representers::Show.one(friendship_invitation), status: :ok
+        in :validate, error
+          error!(:validation_error, error, :unprocessable_entity)
+        in :check_invitation_existence, error
+          error!(:check_invitation_existence, error, :not_found)
+        in :authorize, error
+          error!(:authorize, error, :forbidden)
+        in :check_invitation_status, error
+          error!(:check_invitation_status, error, :conflict)
+        end
+      end
+
+      def reject
+        case ::FriendshipInvitations::UseCases::Reject.new(*params_with_current_user).call
+        in Success(friendship_invitation)
+          render json: ::FriendshipInvitations::Representers::Show.one(friendship_invitation), status: :ok
+        in :validate, error
+          error!(:validation_error, error, :unprocessable_entity)
+        in :check_invitation_existence, error
+          error!(:check_invitation_existence, error, :not_found)
+        in :authorize, error
+          error!(:authorize, error, :forbidden)
+        in :check_invitation_status, error
+          error!(:check_invitation_status, error, :conflict)
+        end
+      end
     end
   end
 end

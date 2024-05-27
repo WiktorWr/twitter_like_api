@@ -1,7 +1,12 @@
 en:
+  common:
+    invalid_parameters: "Invalid parameters"
+    access_forbidden: "Access forbidden"
   users:
     not_found: "User is not found"
   friendship_invitations:
     receiver_is_sender: "Receiver cannot be a sender"
     pending_invitation_exists: "Pending invitations already exists"
     users_are_friends: "User are friends already"
+    not_pending: "Friendship invitation status for this action must be: pending"
+    not_found: "Friendship invitation is not found"

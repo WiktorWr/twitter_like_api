@@ -12,7 +12,12 @@ Rails.application.routes.draw do
 
       resources :posts,                  only: %i[create index]
       resources :users,                  only: %i[index]
-      resources :friendship_invitations, only: %i[create]
+      resources :friendship_invitations, only: %i[create] do
+        member do
+          post :accept
+          post :reject
+        end
+      end
     end
   end
 end

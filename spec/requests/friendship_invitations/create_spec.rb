@@ -30,7 +30,7 @@ describe "Friendship invitations API" do
 
       response "201", "create friendship invitation" do
         schema type:  :object,
-               allOf: [{ "$ref": "#/components/schemas/post" }]
+               allOf: [{ "$ref": "#/components/schemas/friendship_invitation" }]
 
         run_test!
       end

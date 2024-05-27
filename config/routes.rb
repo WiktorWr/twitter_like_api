@@ -10,8 +10,12 @@ Rails.application.routes.draw do
         skip_controllers :authorizations, :applications, :authorized_applications
       end
 
-      resources :posts,                  only: %i[create index]
-      resources :users,                  only: %i[index]
+      resources :users, only: %i[index]
+      resources :posts, only: %i[create index] do
+        member do
+          resource :likes, only: %i[create destroy], controller: :post_likes
+        end
+      end
       resources :friendship_invitations, only: %i[create] do
         member do
           post :accept

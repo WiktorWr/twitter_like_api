@@ -4,7 +4,7 @@ require "swagger_helper"
 
 describe "Friendship invitations API" do
   path "/api/v1/friendship_invitations/{id}/reject" do
-    post "Accept friendship invitation" do
+    post "Reject friendship invitation" do
       tags "Friendship Invitations"
       consumes "application/json"
       produces "application/json"
@@ -19,7 +19,7 @@ describe "Friendship invitations API" do
       let!(:invitation) { create(:friendship_invitation, sender: other_user, receiver: user) }
       let!(:id)         { invitation.id }
 
-      response "200", "accept friendship invitation" do
+      response "200", "reject friendship invitation" do
         schema type:  :object,
                allOf: [{ "$ref": "#/components/schemas/friendship_invitation" }]
 

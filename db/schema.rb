@@ -21,11 +21,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_26_174549) do
   create_table "friendship_invitations", force: :cascade do |t|
     t.bigint "sender_id", null: false
     t.bigint "receiver_id", null: false
-    t.enum "invitation_status", default: "pending", null: false, enum_type: "invitation_status"
+    t.enum "status", default: "pending", null: false, enum_type: "invitation_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["receiver_id"], name: "index_friendship_invitations_on_receiver_id"
-    t.index ["sender_id", "receiver_id"], name: "index_friendship_invitations_on_sender_id_and_receiver_id", unique: true, where: "(invitation_status = 'pending'::invitation_status)"
+    t.index ["sender_id", "receiver_id"], name: "index_friendship_invitations_on_sender_id_and_receiver_id", unique: true, where: "(status = 'pending'::invitation_status)"
     t.index ["sender_id"], name: "index_friendship_invitations_on_sender_id"
     t.check_constraint "sender_id <> receiver_id", name: "sender_not_equal_to_receiver"
   end

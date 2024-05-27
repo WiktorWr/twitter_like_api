@@ -137,7 +137,7 @@ describe FriendshipInvitations::UseCases::Create do
     end
 
     it "sets propoer friendship invitation status" do
-      expect(create_friendship_invitation.success.invitation_status).to eq(FriendshipInvitation::INVIATION_STATUSES[:pending])
+      expect(create_friendship_invitation.success.status).to eq(FriendshipInvitation::STATUSES[:pending])
     end
   end
 
@@ -149,7 +149,7 @@ describe FriendshipInvitations::UseCases::Create do
     end
 
     before do
-      create(:friendship_invitation, sender: other_user, receiver: user, invitation_status: FriendshipInvitation::INVIATION_STATUSES[:rejected])
+      create(:friendship_invitation, sender: other_user, receiver: user, status: FriendshipInvitation::STATUSES[:rejected])
     end
 
     it "is success" do
@@ -161,7 +161,7 @@ describe FriendshipInvitations::UseCases::Create do
     end
 
     it "sets propoer friendship invitation status" do
-      expect(create_friendship_invitation.success.invitation_status).to eq(FriendshipInvitation::INVIATION_STATUSES[:pending])
+      expect(create_friendship_invitation.success.status).to eq(FriendshipInvitation::STATUSES[:pending])
     end
   end
 end

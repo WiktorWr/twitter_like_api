@@ -14,6 +14,8 @@ gem "pry-byebug"
 gem "pry-rails"
 gem "puma"
 gem "rails"
+gem "state_machines"
+gem "state_machines-activerecord"
 
 group :development do
   gem "active_record_query_trace"

@@ -61,14 +61,14 @@ module FriendshipInvitations
 
       def pending_invitation_exists?
         FriendshipInvitation.exists?(
-          sender:            current_user,
+          sender:   current_user,
           receiver:,
-          invitation_status: FriendshipInvitation::INVIATION_STATUSES[:pending]
+          status:   FriendshipInvitation::STATUSES[:pending]
         ) ||
           FriendshipInvitation.exists?(
-            sender:            receiver,
-            receiver:          current_user,
-            invitation_status: FriendshipInvitation::INVIATION_STATUSES[:pending]
+            sender:   receiver,
+            receiver: current_user,
+            status:   FriendshipInvitation::STATUSES[:pending]
           )
       end
     end

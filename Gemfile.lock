@@ -352,6 +352,13 @@ GEM
       simplecov (~> 0.19)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
+    state_machines (0.6.0)
+    state_machines-activemodel (0.9.0)
+      activemodel (>= 6.0)
+      state_machines (>= 0.6.0)
+    state_machines-activerecord (0.9.0)
+      activerecord (>= 6.0)
+      state_machines-activemodel (>= 0.9.0)
     stringio (3.1.0)
     strscan (3.1.0)
     thor (1.3.1)
@@ -405,6 +412,8 @@ DEPENDENCIES
   rubocop-rspec
   simplecov
   simplecov-cobertura
+  state_machines
+  state_machines-activerecord
 
 BUNDLED WITH
    2.5.3

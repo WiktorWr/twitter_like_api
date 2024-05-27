@@ -5,4 +5,3 @@ en:
     receiver_is_sender: "Receiver cannot be a sender"
     pending_invitation_exists: "Pending invitations already exists"
     users_are_friends: "User are friends already"
-

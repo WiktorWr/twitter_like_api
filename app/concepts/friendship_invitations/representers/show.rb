@@ -6,7 +6,7 @@ module FriendshipInvitations
       represent_with :id,
                      :receiver,
                      :sender,
-                     :invitation_status,
+                     :status,
                      :created_at
 
       private

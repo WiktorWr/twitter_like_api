@@ -131,5 +131,13 @@ describe FriendshipInvitations::UseCases::Accept do
       accept_friendship_invitation
       expect(invitation.sender.reload.friends).to contain_exactly(invitation.receiver)
     end
+
+    it "creates chat" do
+      expect { accept_friendship_invitation }.to change(Chat, :count).by(1)
+    end
+
+    it "creates chat users" do
+      expect { accept_friendship_invitation }.to change(ChatUser, :count).by(2)
+    end
   end
 end

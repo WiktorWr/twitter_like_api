@@ -22,6 +22,11 @@ Rails.application.routes.draw do
           post :reject
         end
       end
+      resources :chats, only: %i[] do
+        member do
+          resources :messages, only: %i[create index]
+        end
+      end
     end
   end
 end

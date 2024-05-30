@@ -68,6 +68,15 @@ RSpec.configure do |config|
               sender:     { "$ref": "#/components/schemas/user" },
               created_at: { type: :string, format: "date-time" }
             }
+          },
+          message: {
+            type:       :object,
+            properties: {
+              id:         { type: :integer },
+              text:       { type: :string },
+              created_at: { type: :string, format: "date-time" },
+              user:       { "$ref": "#/components/schemas/user" }
+            }
           }
         }
       }

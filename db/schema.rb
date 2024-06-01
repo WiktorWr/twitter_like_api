@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_28_203242) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_01_132852) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "invitation_status", ["pending", "accepted", "rejected"]
+  create_enum "notification_type", ["friendship_invitation", "post_liked"]
 
   create_table "chat_users", force: :cascade do |t|
     t.bigint "chat_id", null: false
@@ -77,6 +78,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_203242) do
     t.index ["created_at", "chat_id"], name: "index_messages_on_created_at_desc_and_chat_id", order: { created_at: :desc }
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "text", null: false
+    t.bigint "friendship_invitation_id"
+    t.bigint "post_id"
+    t.enum "notification_type", null: false, enum_type: "notification_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friendship_invitation_id"], name: "index_notifications_on_friendship_invitation_id"
+    t.index ["post_id"], name: "index_notifications_on_post_id"
+  end
+
   create_table "oauth_access_grants", force: :cascade do |t|
     t.bigint "resource_owner_id", null: false
     t.bigint "application_id", null: false
@@ -128,6 +140,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_203242) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "user_notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "notification_id", null: false
+    t.boolean "seen", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notification_id"], name: "index_user_notifications_on_notification_id"
+    t.index ["user_id", "notification_id"], name: "index_user_notifications_on_user_id_and_notification_id", unique: true
+    t.index ["user_id"], name: "index_user_notifications_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -147,9 +170,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_203242) do
   add_foreign_key "likes", "users"
   add_foreign_key "messages", "chat_users"
   add_foreign_key "messages", "chats"
+  add_foreign_key "notifications", "friendship_invitations"
+  add_foreign_key "notifications", "posts"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"
   add_foreign_key "posts", "users"
+  add_foreign_key "user_notifications", "notifications"
+  add_foreign_key "user_notifications", "users"
 end

@@ -16,7 +16,7 @@ describe "Chat Messages API" do
 
       include_context "authorize_user"
 
-      let!(:user_two)   { create(:user) }
+      let!(:user_two) { create(:user) }
 
       let!(:chat)            { create(:chat) }
       let!(:chat_user_one)   { create(:chat_user, chat:, user:) }
@@ -51,9 +51,9 @@ describe "Chat Messages API" do
 
       response "200", "gets chat messages" do
         schema type:  :array,
-                   items: {
-                     allOf: [{ "$ref": "#/components/schemas/message" }]
-                   }
+               items: {
+                 allOf: [{ "$ref": "#/components/schemas/message" }]
+               }
 
         context "without oldest_item_id" do
           run_test!

@@ -69,7 +69,7 @@ RSpec.configure do |config|
               created_at: { type: :string, format: "date-time" }
             }
           },
-          message: {
+          message:               {
             type:       :object,
             properties: {
               id:         { type: :integer },

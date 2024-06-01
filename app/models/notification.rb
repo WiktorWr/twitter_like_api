@@ -27,8 +27,9 @@ class Notification < ApplicationRecord
   belongs_to :post, optional: true
 
   NOTIFICATION_TYPES = {
-    friendship_invitation: "friendship_invitation",
-    post_liked:            "post_liked"
+    friendship_invitation:          "friendship_invitation",
+    friendship_invitation_accepted: "friendship_invitation_accepted",
+    post_liked:                     "post_liked"
   }.freeze
 
   enum notification_type: NOTIFICATION_TYPES

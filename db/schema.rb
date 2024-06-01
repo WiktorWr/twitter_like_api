@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_132852) do
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "invitation_status", ["pending", "accepted", "rejected"]
-  create_enum "notification_type", ["friendship_invitation", "post_liked"]
+  create_enum "notification_type", ["friendship_invitation", "friendship_invitation_accepted", "post_liked"]
 
   create_table "chat_users", force: :cascade do |t|
     t.bigint "chat_id", null: false

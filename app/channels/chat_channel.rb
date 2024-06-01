@@ -9,7 +9,7 @@ class ChatChannel < ApplicationCable::Channel
     end
   end
 
-  ## HELPER METHODS
+  # HELPER METHODS
 
   def chat_user_valid?
     ChatUser.exists?(chat_id: params[:chat_id].to_i, user_id: connection.current_user.id)

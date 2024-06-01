@@ -15,6 +15,7 @@ gem "pry-byebug"
 gem "pry-rails"
 gem "puma"
 gem "rails"
+gem "redis"
 gem "state_machines"
 gem "state_machines-activerecord"
 
@@ -40,6 +41,7 @@ end
 group :test do
   gem "database_cleaner"
   gem "database_cleaner-active_record"
+  gem "database_cleaner-redis"
   gem "rspec_junit_formatter"
   gem "rspec-rails"
   gem "simplecov", require: false

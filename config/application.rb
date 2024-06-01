@@ -19,7 +19,7 @@ module TwitterApi
     end
 
     config.require_master_key = true
-
+    config.redis = config_for(:redis)
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 

@@ -5,12 +5,15 @@ if ENV.fetch("RAILS_ENV").eql?("test")
   require "database_cleaner/active_record"
 
   RSpec.configure do |config|
+    DatabaseCleaner[:redis].db = Rails.configuration.redis[:url]
+
     config.before(:suite) do
       DatabaseCleaner[:active_record].clean_with(:truncation)
     end
 
     config.before do
       DatabaseCleaner[:active_record].strategy = :transaction
+      DatabaseCleaner[:redis].strategy = :deletion
     end
 
     config.before do

@@ -2,7 +2,7 @@
 
 class CreateNotifications < ActiveRecord::Migration[7.1]
   def change
-    create_enum "notification_type", %w[friendship_invitation post_liked]
+    create_enum "notification_type", %w[friendship_invitation friendship_invitation_accepted post_liked]
 
     create_table :notifications do |t|
       t.string :text, null: false

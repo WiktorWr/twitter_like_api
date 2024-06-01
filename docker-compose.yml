@@ -11,10 +11,16 @@ services:
       POSTGRES_USER: twitter_backend
       POSTGRES_PASSWORD: twitter_backend
 
+  redis:
+    image: redis:7
+    volumes:
+      - redis_data:/data
+
   app:
     build: .
     depends_on:
       - postgres
+      - redis
     ports:
       - "3000:3000"
     volumes:
@@ -41,3 +47,4 @@ services:
 
 volumes:
   postgres_data:
+  redis_data:

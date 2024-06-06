@@ -1,12 +1,8 @@
 default: &default
-  url: redis://redis:6379
+  url: <%= ENV.fetch("CI", "redis://redis:6379") %>
 
 test:
   <<: *default
 
 development:
   <<: *default
-
-staging:
-  <<: *default
-  url: redis://localhost:6379

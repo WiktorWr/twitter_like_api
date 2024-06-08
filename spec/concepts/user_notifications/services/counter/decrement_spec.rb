@@ -49,7 +49,9 @@ describe UserNotifications::Services::Counter::Decrement do
 
     it "broadcasts value to the proper channel" do
       expect { decrement_counter }.to(
-        have_broadcasted_to("user_notifications_counter_channel_#{user_id}").exactly(:once)
+        have_broadcasted_to("user_notifications_counter_channel_#{user_id}").exactly(:once).with(
+          { count: "2" }
+        )
       )
     end
   end
@@ -70,7 +72,9 @@ describe UserNotifications::Services::Counter::Decrement do
 
     it "broadcasts value to the proper channel" do
       expect { decrement_counter }.to(
-        have_broadcasted_to("user_notifications_counter_channel_#{user_id}").exactly(:once)
+        have_broadcasted_to("user_notifications_counter_channel_#{user_id}").exactly(:once).with(
+          { count: "9" }
+        )
       )
     end
   end
@@ -95,7 +99,9 @@ describe UserNotifications::Services::Counter::Decrement do
 
     it "broadcasts value to the proper channel" do
       expect { decrement_counter }.to(
-        have_broadcasted_to("user_notifications_counter_channel_#{user_id}").exactly(:once)
+        have_broadcasted_to("user_notifications_counter_channel_#{user_id}").exactly(:once).with(
+          { count: "4" }
+        )
       )
     end
   end

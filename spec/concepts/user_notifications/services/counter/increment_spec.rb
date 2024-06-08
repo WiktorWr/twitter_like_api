@@ -47,7 +47,9 @@ describe UserNotifications::Services::Counter::Increment do
 
     it "broadcasts value to the proper channel" do
       expect { increment_counter }.to(
-        have_broadcasted_to("user_notifications_counter_channel_#{user_id}").exactly(:once)
+        have_broadcasted_to("user_notifications_counter_channel_#{user_id}").exactly(:once).with(
+          { count: "2" }
+        )
       )
     end
   end
@@ -68,7 +70,9 @@ describe UserNotifications::Services::Counter::Increment do
 
     it "broadcasts value to the proper channel" do
       expect { increment_counter }.to(
-        have_broadcasted_to("user_notifications_counter_channel_#{user_id}").exactly(:once)
+        have_broadcasted_to("user_notifications_counter_channel_#{user_id}").exactly(:once).with(
+          { count: "11" }
+        )
       )
     end
   end

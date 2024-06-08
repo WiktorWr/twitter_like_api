@@ -11,7 +11,7 @@ module Notifications
 
         ActiveRecord::Base.transaction do
           notification = yield create_notification!
-          user_notifications = yield create_user_notifications!(notification)
+          user_notifications = yield create_user_notifications!(notification.id)
           increment_notifications_counter!(user_notifications)
           broadcast_notifications(user_notifications)
         end
@@ -50,22 +50,29 @@ module Notifications
         Success(new_notification)
       end
 
-      def create_user_notifications!(notification)
-        new_user_notifications = UserNotifications::Queries::Create.call(
-          notification.id, validated_params[:receiver_ids]
-        )
+      def create_user_notifications!(notification_id)
+        new_notifications_data = receivers.map do |receiver|
+          {
+            notification_id:,
+            user_id:         receiver.id
+          }
+        end
 
-        Success(new_user_notifications)
+        new_user_notifications_ids = UserNotification.upsert_all(new_notifications_data)
+                                                     .rows
+                                                     .flatten
+
+        Success(UserNotification.where(id: new_user_notifications_ids))
       end
 
       def increment_notifications_counter!(user_notifications)
         user_notifications.each do |user_notification|
           ::UserNotifications::Services::Counter::Increment.new(
-            user_notification["user_id"]
+            user_notification.user_id
           ).call
         end
 
-        Success()
+        Success(user_notifications)
       end
 
       def broadcast_notifications(user_notifications)
@@ -105,6 +112,8 @@ module Notifications
         case notification_type
         when Notification::NOTIFICATION_TYPES[:friendship_invitation]
           I18n.t("notifications.friendship_invitation")
+        when Notification::NOTIFICATION_TYPES[:friendship_invitation_accepted]
+          I18n.t("notifications.friendship_invitation_accepted")
         when Notification::NOTIFICATION_TYPES[:post_liked]
           I18n.t("notifications.post_liked")
         end

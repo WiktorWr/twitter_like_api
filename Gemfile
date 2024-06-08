@@ -22,6 +22,7 @@ gem "state_machines-activerecord"
 group :development do
   gem "active_record_query_trace"
   gem "annotate"
+  gem "bundler-audit"
   gem "rails-erd"
   gem "relaxed-rubocop"
   gem "rubocop", require: false

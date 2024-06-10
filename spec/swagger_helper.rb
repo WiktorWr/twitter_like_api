@@ -77,6 +77,23 @@ RSpec.configure do |config|
               created_at: { type: :string, format: "date-time" },
               user:       { "$ref": "#/components/schemas/user" }
             }
+          },
+          notification:          {
+            type:       :object,
+            properties: {
+              notification_type:        { type: :string, enum: Notification::NOTIFICATION_TYPES.values },
+              post_id:                  { type: :integer, nullable: true },
+              friendship_invitation_id: { type: :integer, nullable: true }
+            }
+          },
+          user_notification:     {
+            type:       :object,
+            properties: {
+              id:           { type: :integer },
+              seen:         { type: :boolean },
+              notification: { "$ref": "#/components/schemas/notification" },
+              created_at:   { type: :string, format: "date-time" }
+            }
           }
         }
       }

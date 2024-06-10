@@ -27,6 +27,7 @@ Rails.application.routes.draw do
           resources :messages, only: %i[create index]
         end
       end
+      resources :user_notifications, only: %i[index]
     end
   end
 end

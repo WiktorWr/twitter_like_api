@@ -3,7 +3,7 @@
 module Api
   module V1
     class UsersController < BaseController
-      before_action only: [:index] do
+      before_action only: [:index, :unread_notifications_count] do
         doorkeeper_authorize!
       end
 
@@ -28,6 +28,12 @@ module Api
         in :check_email_existence, _
           head :created # I don't want to expose information whether an account exists
         end
+      end
+
+      def unread_notifications_count
+        render json: {
+          count: ::UserNotifications::UseCases::UnreadCount.new(*params_with_current_user).call.success
+        }, status: :ok
       end
     end
   end

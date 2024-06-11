@@ -10,7 +10,11 @@ Rails.application.routes.draw do
         skip_controllers :authorizations, :applications, :authorized_applications
       end
 
-      resources :users, only: %i[create index]
+      resources :users, only: %i[create index] do
+        member do
+          get :unread_notifications_count
+        end
+      end
       resources :posts, only: %i[create index] do
         member do
           resource :likes, only: %i[create destroy], controller: :post_likes
@@ -30,7 +34,7 @@ Rails.application.routes.draw do
       resources :user_notifications, only: %i[index] do
         collection do
           post :read
-          # post :read_all
+          post :read_all
         end
       end
     end

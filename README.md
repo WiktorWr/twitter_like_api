@@ -1,24 +1,33 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Twitter-like App with Additional Features (Invite Friends & Chat)
 
-Things you may want to cover:
+This project is a Twitter-like application with added functionality such as inviting friends and chatting. It uses a Ruby on Rails backend, PostgreSQL as the primary database, Redis for caching, and Redoc for API documentation.
 
-* Ruby version
+- Services
+  - Postgres
+  - Redis
+  - App
+  - API Documentation (Redoc)
 
-* System dependencies
 
-* Configuration
+## Project Setup
 
-* Database creation
+To get started with the project, follow these steps:
 
-* Database initialization
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/your-username/twitter-like-app.git
+   cd twitter-like-app
+   ```
 
-* How to run the test suite
+2. **Build and Start the Containers:**
+   Run the following command to start the services defined in `docker-compose.yml`:
 
-* Services (job queues, cache servers, search engines, etc.)
+   ```bash
+   docker-compose up --build
+   ```
 
-* Deployment instructions
-
-* ...
+   This command will:
+   - Build the application image.
+   - Spin up the `Postgres`, `Redis`, and `App` services.
+   - Run the Rails app on `http://localhost:3000`.

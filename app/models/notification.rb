@@ -32,5 +32,5 @@ class Notification < ApplicationRecord
     post_liked:                     "post_liked"
   }.freeze
 
-  enum notification_type: NOTIFICATION_TYPES
+  enum :notification_type, NOTIFICATION_TYPES
 end

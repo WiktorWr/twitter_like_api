@@ -32,7 +32,7 @@ class FriendshipInvitation < ApplicationRecord
     rejected: "rejected"
   }.freeze
 
-  enum status: STATUSES
+  enum :status, STATUSES
 
   state_machine :status, initial: STATUSES[:pending] do
     event :reject do
